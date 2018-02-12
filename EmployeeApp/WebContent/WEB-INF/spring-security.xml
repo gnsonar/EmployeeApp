@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security" 
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+						http://www.springframework.org/schema/security 
+						http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+	
+	<http create-session="stateless" auto-config="false" use-expressions="true" entry-point-ref="empAuthEntryPoint">
+		<csrf disabled="true"/>
+		
+		<intercept-url pattern="/home" access="permitAll" />
+		<intercept-url pattern="/employees/*" access="isAuthenticated()" />
+		<intercept-url pattern="/employees/deleteEmployee" access="hasAuthority('admin')" />
+		<custom-filter ref="empAuthcutomFilter" position="FORM_LOGIN_FILTER"/>
+		<logout logout-url="/logout"/>
+	</http>
+	
+	<beans:bean id="empAuthEntryPoint" class="com.employee.security.handler.EmployeeAuthenticationFailure" />
+	<beans:bean id="empAuthcutomFilter" class="com.employee.security.config.EmployeeAuthenticationFilter">
+		<beans:constructor-arg>
+			<beans:value type="java.lang.String">/employees/*</beans:value>
+		</beans:constructor-arg>
+	</beans:bean>
+	
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="user" password="user" authorities="ROLE_USER"/>
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+</beans:beans>
