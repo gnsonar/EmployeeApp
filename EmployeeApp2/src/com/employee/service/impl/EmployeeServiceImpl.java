@@ -8,13 +8,11 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.employee.exception.classes.EmployeeAppException;
 import com.employee.exception.classes.EmployeeNotExists;
 import com.employee.model.Employee;
-import com.employee.repository.EmployeeRepository;
 import com.employee.service.EmployeeService;
 import com.employee.util.EmployeeAppConstants;
 
@@ -23,8 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstan
 
 	Map<Integer, Employee> employeeList = new HashMap<>();
 	
-	@Autowired
-	private EmployeeRepository empRepo;
+	
 	
 	@Override
 	public Integer addEmployee(Employee emp) throws EmployeeAppException {

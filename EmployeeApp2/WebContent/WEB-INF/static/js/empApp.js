@@ -2,13 +2,13 @@
 
 	mainApp.factory('restConstants', function(){
 		var endPoints = {
-				EMP_VALIDATE_TOKEN_SERVICE : '/EmployeeApp/validateToken',
-				EMP_LOGIN_SERVICE :  '/EmployeeApp/home',
-				EMP_GET_ALL_SERVICE :  '/EmployeeApp/employees/getAllEmployees',
-				EMP_SAVE_SERVICE :  '/EmployeeApp/employees/saveEmployee',
-				EMP_SAVE_PHOTO_SERVICE :  '/EmployeeApp/employees/saveEmployeePhoto',
-				EMP_GET_PHOTO_SERVICE :  '/EmployeeApp/employees/getEmployeePhoto',
-				EMP_DEL_SERVICE :  '/EmployeeApp/employees/deleteEmployee'
+				EMP_VALIDATE_TOKEN_SERVICE : '/EmployeeApp2/validateToken',
+				EMP_LOGIN_SERVICE :  '/EmployeeApp2/home',
+				EMP_GET_ALL_SERVICE :  '/EmployeeApp2/employees/getAllEmployees',
+				EMP_SAVE_SERVICE :  '/EmployeeApp2/employees/saveEmployee',
+				EMP_SAVE_PHOTO_SERVICE :  '/EmployeeApp2/employees/saveEmployeePhoto',
+				EMP_GET_PHOTO_SERVICE :  '/EmployeeApp2/employees/getEmployeePhoto',
+				EMP_DEL_SERVICE :  '/EmployeeApp2/employees/deleteEmployee'
 		};
 		
 		return endPoints;
@@ -392,7 +392,7 @@
     		
     		$scope.openViewImagePopUp = function(emp){
     			sessionStorage.setItem("empId",emp.id);
-    			$window.open('/EmployeeApp/static/viewPhoto.html', "popup", "width=300,height=200,left=500,top=150");
+    			$window.open('/EmployeeApp2/static/viewPhoto.html', "popup", "width=300,height=200,left=500,top=150");
     		}
     		
 	});

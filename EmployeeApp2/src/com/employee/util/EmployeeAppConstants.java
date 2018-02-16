@@ -19,7 +19,7 @@ public interface EmployeeAppConstants {
 	String AUTH_HEADER_NAME = "Authorization";
 	String JWT_TOKEN_USERNAME_CLAIM = "username";
 	String JWT_TOKEN_ROLE_CLAIM = "role";
-	int JWT_TOKEN_EXPIRATION_PERIOD = 5;
+	int JWT_TOKEN_EXPIRATION_PERIOD = 1;
 	
 	String JWT_TOKEN_SECRET_KEY = "emp-app-secret-key";
 	String JWT_TOKEN_ENCODING_TYPE = "UTF-8";

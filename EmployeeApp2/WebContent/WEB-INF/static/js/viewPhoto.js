@@ -13,7 +13,7 @@ mainApp.controller('photoAppCntrl', function($scope,$http){
 	        	'Content-Type': 'application/json',
 	        	'Authorization' : token
 	        },
-	        url: '/EmployeeApp/employees/getEmployeePhoto?empId='+empId
+	        url: '/EmployeeApp2/employees/getEmployeePhoto?empId='+empId
 	    }).then(function (response) {
 	        console.log(response.data);
 	        $scope.image = response.data;

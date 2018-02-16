@@ -36,7 +36,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({
-	"file:C:/Users/GS00545139/Documents/workspace-eclipse/EmployeeApp/WebContent/WEB-INF/spring-servlet.xml" 
+	"file:C:\\Users\\gs00545139\\git\\EmployeeApp\\EmployeeApp2\\WebContent\\WEB-INF\\spring-servlet.xml" 
 })
 @WebAppConfiguration
 public class EmployeeControllerJunit {

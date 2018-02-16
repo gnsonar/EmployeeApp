@@ -2,16 +2,10 @@ package com.employee.repository.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 
-import com.mongodb.DB;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 
-@Configuration
+
+
 public class MongoDbConfiguration {
 
 	@Value("${mongo.db.dbname}")
@@ -29,7 +23,7 @@ public class MongoDbConfiguration {
 	@Value("${mongo.db.url.secondary2}")
 	private String dbUrlSecondary2;
 	
-	@Bean
+	/*@Bean
 	public DB getMongoDatabase(){
 		
 		MongoClientURI uri = new MongoClientURI(dbUrlPrimary);
@@ -40,7 +34,7 @@ public class MongoDbConfiguration {
 		return database;
 	}
 	
-	/*public @Bean
+	public @Bean
 	MongoDbFactory mongoDbFactory() throws Exception {
 		return new SimpleMongoDbFactory(new MongoClient(dbUrlPrimary), dbName);
 	}

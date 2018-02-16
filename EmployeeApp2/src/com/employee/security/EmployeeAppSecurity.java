@@ -54,9 +54,9 @@ public class EmployeeAppSecurity extends WebSecurityConfigurerAdapter{
 											 "/index.html",
 											 "/static/**","/validateToken").permitAll();
 		
-		http.authorizeRequests().anyRequest().authenticated();
-		
 		http.authorizeRequests().antMatchers("/employees/**").authenticated();
+		
+		http.authorizeRequests().anyRequest().authenticated();
 		
 		//http.authorizeRequests().antMatchers("/employees/saveEmployee").access("hasAuthority('ROLE_ADMIN')");
 	

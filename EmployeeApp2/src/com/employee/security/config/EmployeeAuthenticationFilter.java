@@ -13,8 +13,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.stereotype.Component;
 
 import com.employee.model.AppUser;
+import com.employee.security.handler.EmployeeAuthenticationSucessHandler;
 import com.employee.security.model.AuthenticationToken;
 import com.employee.security.model.JwtAuthenticationToken;
 import com.employee.util.EmployeeAppConstants;
@@ -30,6 +32,8 @@ public class EmployeeAuthenticationFilter extends AbstractAuthenticationProcessi
 		
 		super(requiresAuthenticationRequestMatcher);
 		super.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher(requiresAuthenticationRequestMatcher));
+		setAuthenticationManager(new EmployeeAuthenticationManager());
+		setAuthenticationSuccessHandler(new EmployeeAuthenticationSucessHandler());
 	}
 
 	@Override
