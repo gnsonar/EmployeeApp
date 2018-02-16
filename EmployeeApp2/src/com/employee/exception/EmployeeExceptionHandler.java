@@ -34,7 +34,7 @@ public class EmployeeExceptionHandler implements EmployeeAppConstants{
 	
 	@ExceptionHandler(EmployeeAppException.class)
 	public ResponseEntity<ErrorResponse> employeeAppExceptionException(EmployeeAppException ex){
-		
+		ex.printStackTrace();
 		rootCause = Stream.iterate(ex, Throwable::getCause).filter(element -> element.getCause() == null).findFirst();
 		
 		ErrorResponse error = new ErrorResponse(EMPLOYEE_EXP_HANDLER_ERR_CODE, EMPLOYEE_EXP_HANDLER_EMPAPP_EXP_MSG, rootCause.get().toString());

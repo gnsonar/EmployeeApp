@@ -52,7 +52,7 @@ public class EmployeeAppSecurity extends WebSecurityConfigurerAdapter{
 		
 		http.authorizeRequests().antMatchers("/home",
 											 "/index.html",
-											 "/static/**","/validateToken").permitAll();
+											 "/static/**","/validateToken","/").permitAll();
 		
 		http.authorizeRequests().antMatchers("/employees/**").authenticated();
 		

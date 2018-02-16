@@ -95,8 +95,8 @@ public class EmployeeControllerJunit {
 		dto.setLastName("sonar");
 		dto.setEmail("gautam@gmail.com");
 		dto.setUser("admin");
-		dto.setId("12345674");
-		when(empService.addEmployee(any(Employee.class))).thenReturn(12345674);
+		dto.setId(12345674l);
+		when(empService.addEmployee(any(Employee.class))).thenReturn(12345674l);
 		when(empService.updateEmployee(any(Integer.class), any(Employee.class))).thenReturn(true);
 		
 		mockMvc.perform(post("/employees/saveEmployee")

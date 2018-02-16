@@ -8,39 +8,44 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.employee.exception.classes.EmployeeAppException;
 import com.employee.exception.classes.EmployeeNotExists;
 import com.employee.model.Employee;
+import com.employee.repository.EmployeeRepositoryDB;
 import com.employee.service.EmployeeService;
 import com.employee.util.EmployeeAppConstants;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstants{
 
-	Map<Integer, Employee> employeeList = new HashMap<>();
+	Map<Long, Employee> employeeList = new HashMap<>();
 	
-	
+	@Autowired
+	@Qualifier("hbTemplate")
+	EmployeeRepositoryDB<Employee> employeeRepo;
 	
 	@Override
-	public Integer addEmployee(Employee emp) throws EmployeeAppException {
-		Integer id = 0;
+	public Long addEmployee(Employee emp) throws EmployeeAppException {
+		Long id = 0l;
 		try{
-			id = Math.abs(new Random().nextInt());
-			emp.setId(String.valueOf(id));
-			
+			id = employeeRepo.saveObject(emp);
+			emp.setId(id);
 			employeeList.put(id, emp);
 			
-			//empRepo.addEmployee(emp);
+			
 		}catch(Exception e){
+			e.printStackTrace();
 			throw new EmployeeAppException(EMPLOYEE_APP_CREATE_EXCEPTION_MSG);
 		}
 		return id;
 	}
 
 	@Override
-	public Employee getEmployee(Integer empId) {
+	public Employee getEmployee(long empId) {
 		
 		Employee emp = employeeList.get(empId);
 		if(emp == null){
@@ -50,7 +55,7 @@ public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstan
 	}
 
 	@Override
-	public boolean deleteEmployee(Integer empid) throws EmployeeAppException {
+	public boolean deleteEmployee(long empid) throws EmployeeAppException {
 		boolean sts = false;
 		try{
 			if(employeeList.remove(empid) != null){
@@ -64,7 +69,7 @@ public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstan
 	}
 	
 	@Override
-	public boolean updateEmployee(Integer empid, Employee emp) throws EmployeeAppException {
+	public boolean updateEmployee(long empid, Employee emp) throws EmployeeAppException {
 
 		boolean sts = false;
 		try{
@@ -92,19 +97,24 @@ public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstan
 	}
 
 	@Override
-	public void addEmployeePhoto(String empId, byte[] photo) {
-		Optional<Employee> empObj = employeeList.values().stream().filter(emp -> emp.getId().equalsIgnoreCase(empId)).findFirst();
+	public void addEmployeePhoto(long empId, byte[] photo) {
+		
+		Employee emp = employeeRepo.getObject(empId);
+		emp.setPhoto(photo);
+		employeeRepo.updateObject(emp);
+		
+		/*Optional<Employee> empObj = employeeList.values().stream().filter(emp -> emp.getId() == empId).findFirst();
 		
 		if(empObj.get() != null){
 			empObj.get().setPhoto(photo);
-		}
+		}*/
 	}
 
 	@Override
-	public byte[] getEmployeePhoto(String empId) {
-		Optional<Employee> empObj = employeeList.values().stream().filter(emp -> emp.getId().equalsIgnoreCase(empId)).findFirst();
+	public byte[] getEmployeePhoto(long empId) {
+		Optional<Employee> empObj = employeeList.values().stream().filter(emp -> emp.getId() == empId).findFirst();
 		
-		return empObj.get().getPhoto();
+		return employeeRepo.getObject(empId).getPhoto();
 	}
 
 	

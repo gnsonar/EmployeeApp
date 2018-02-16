@@ -1,13 +1,10 @@
 package com.employee;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,21 +42,21 @@ public class EmployeeController implements EmployeeAppConstants{
 	public String saveEmployee(@RequestBody EmployeeDTO emp) throws EmployeeAppException {
 		
 		String sts = EMP_APP_SER_FAIL;
-		Integer id = 0;
-		if(EMP_APP_ID_0.equalsIgnoreCase(emp.getId()) &&  (id = empService.addEmployee(ModelMapperUtil.mapEmpDTOToModel(emp))) != 0){
+		Long id = 0l;
+		if(EMP_APP_ID_0.equalsIgnoreCase(String.valueOf(emp.getId())) &&  (id = empService.addEmployee(ModelMapperUtil.mapEmpDTOToModel(emp))) != 0l){
 			sts = String.valueOf(id);
 		}
 		else
 		{
-			empService.updateEmployee(Integer.valueOf(emp.getId()),ModelMapperUtil.mapEmpDTOToModel(emp));
-			sts = emp.getId();
+			empService.updateEmployee(emp.getId(),ModelMapperUtil.mapEmpDTOToModel(emp));
+			sts = String.valueOf(emp.getId());
 		}
 		return sts;
 	}
 	
 	@PostMapping(value = "/saveEmployeePhoto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String saveEmployeePhoto(@RequestParam("uploadfile") MultipartFile file, 
-			@RequestParam("empId") String empId) throws Exception{
+	public String saveEmployeePhoto(@RequestParam("uploadfile") MultipartFile file , 
+			@RequestParam("empId") Long empId) throws Exception{
 		
 		byte[] photo = file.getBytes();
 		empService.addEmployeePhoto(empId, photo);
@@ -68,7 +65,7 @@ public class EmployeeController implements EmployeeAppConstants{
 	}
 	
 	@GetMapping(value = "/getEmployeePhoto", produces = MediaType.APPLICATION_JSON_VALUE)
-	public byte[] getEmployeePhoto(	@RequestParam("empId") String empId) throws Exception{
+	public byte[] getEmployeePhoto(	@RequestParam("empId") Long empId) throws Exception{
 		
 		byte[] photo = empService.getEmployeePhoto(empId);
 		

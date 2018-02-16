@@ -2,7 +2,7 @@ package com.employee.dto;
 
 public class EmployeeDTO {
 
-	private String id;
+	private long id;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -22,10 +22,10 @@ public class EmployeeDTO {
 	public void setUser(String user) {
 		this.user = user;
 	}
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getFirstName() {

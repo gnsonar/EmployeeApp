@@ -8,17 +8,17 @@ import com.employee.model.Employee;
 
 public interface EmployeeService {
 	
-	public Integer addEmployee(Employee emp) throws EmployeeAppException;
+	public Long addEmployee(Employee emp) throws EmployeeAppException;
 	
-	public void addEmployeePhoto(String empId, byte[] photo);
+	public void addEmployeePhoto(long empId, byte[] photo);
 	
-	public Employee getEmployee(Integer empId);
+	public Employee getEmployee(long empId);
 	
-	public boolean deleteEmployee(Integer empid) throws EmployeeAppException;
+	public boolean deleteEmployee(long empid) throws EmployeeAppException;
 	
-	public boolean updateEmployee(Integer empid, Employee emp) throws EmployeeAppException;
+	public boolean updateEmployee(long empid, Employee emp) throws EmployeeAppException;
 
 	public List<Employee> getAllEmployees(String user);
 
-	public byte[] getEmployeePhoto(String empId);
+	public byte[] getEmployeePhoto(long empId);
 }
