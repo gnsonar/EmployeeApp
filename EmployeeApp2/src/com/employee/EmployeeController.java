@@ -3,6 +3,7 @@ package com.employee;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +20,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.employee.dto.EmployeeDTO;
 import com.employee.exception.classes.EmployeeAppException;
 import com.employee.service.EmployeeService;
-import com.employee.util.EmployeeAppConstants;
 import com.employee.util.ModelMapperUtil;
+import com.employee.util.constants.EmployeeAppConstants;
 
 @RestController
 @RequestMapping(value = "/employees")

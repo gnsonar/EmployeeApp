@@ -1,5 +1,8 @@
 package com.employee.repository.impl;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -64,4 +67,50 @@ public class EmployeeRepositryHbImpl implements EmployeeRepositoryDB<Employee>{
 		
 	}
 
+
+	@Override
+	public List<Employee> getAllObject() {
+		
+		Session session = sessionFactory.openSession();
+		
+		Transaction tx = session.beginTransaction();
+		
+		List<Employee> list = session.createCriteria(Employee.class).list();
+		
+		tx.commit();
+		session.close();
+		return list;
+	}
+
+
+	@Override
+	public List<Employee> getAllObject(String user) {
+		
+		Session session = sessionFactory.openSession();
+		
+		Transaction tx = session.beginTransaction();
+		
+		Query query = session.createQuery("from Employee where userCreated = :user");
+		query.setString("user", user);
+		
+		
+		List<Employee> list = query.list();
+		
+		tx.commit();
+		session.close();
+		return list;
+	}
+
+
+	@Override
+	public void deleteObject(Employee emp) {
+		Session session = sessionFactory.openSession();
+		
+		Transaction tx = session.beginTransaction();
+		
+		session.delete(emp);
+		
+		tx.commit();
+		session.close();
+	}
 }

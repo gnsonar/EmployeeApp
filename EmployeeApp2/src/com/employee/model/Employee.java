@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Employee {
@@ -16,6 +17,7 @@ public class Employee {
 	private String email;
 	private String userCreated;
 	
+	@Lob
 	private byte[] photo;
 	
 	public Employee(){}
@@ -24,7 +26,6 @@ public class Employee {
 		this.lastName = lname;
 		this.email = email;
 	}
-	
 	
 	public byte[] getPhoto() {
 		return photo;
@@ -41,11 +42,9 @@ public class Employee {
 	public long getId() {
 		return id;
 	}
-
 	public void setId(long id) {
 		this.id = id;
 	}
-
 
 	public String getFirstName() {
 		return firstName;

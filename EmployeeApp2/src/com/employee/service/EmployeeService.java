@@ -3,6 +3,8 @@ package com.employee.service;
 
 import java.util.List;
 
+import javax.sql.rowset.serial.SerialException;
+
 import com.employee.exception.classes.EmployeeAppException;
 import com.employee.model.Employee;
 
@@ -20,5 +22,5 @@ public interface EmployeeService {
 
 	public List<Employee> getAllEmployees(String user);
 
-	public byte[] getEmployeePhoto(long empId);
+	public byte[] getEmployeePhoto(long empId) throws RuntimeException, SerialException;
 }

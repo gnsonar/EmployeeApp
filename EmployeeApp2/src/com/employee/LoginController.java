@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.employee.dto.LoginLogoutDTO;
 import com.employee.service.LoginService;
-import com.employee.util.EmployeeAppConstants;
 import com.employee.util.JWTParser;
+import com.employee.util.constants.EmployeeAppConstants;
 
 @RestController
 public class LoginController implements EmployeeAppConstants{

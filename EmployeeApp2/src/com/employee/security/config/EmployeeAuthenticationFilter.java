@@ -19,8 +19,8 @@ import com.employee.model.AppUser;
 import com.employee.security.handler.EmployeeAuthenticationSucessHandler;
 import com.employee.security.model.AuthenticationToken;
 import com.employee.security.model.JwtAuthenticationToken;
-import com.employee.util.EmployeeAppConstants;
 import com.employee.util.JWTParser;
+import com.employee.util.constants.EmployeeAppConstants;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;

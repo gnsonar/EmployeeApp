@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.employee.model.AppUser;
 import com.employee.service.LoginService;
-import com.employee.util.EmployeeAppConstants;
+import com.employee.util.constants.EmployeeAppConstants;
 
 @Service
 public class LoginServiceImpl implements LoginService , EmployeeAppConstants{

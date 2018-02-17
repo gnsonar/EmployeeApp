@@ -1,12 +1,6 @@
 package com.employee.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,15 +11,16 @@ import com.employee.exception.classes.EmployeeNotExists;
 import com.employee.model.Employee;
 import com.employee.repository.EmployeeRepositoryDB;
 import com.employee.service.EmployeeService;
-import com.employee.util.EmployeeAppConstants;
+import com.employee.util.constants.EmployeeAppConstants;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstants{
 
-	Map<Long, Employee> employeeList = new HashMap<>();
+	/*Map<Long, Employee> employeeList = new HashMap<>();*/
 	
 	@Autowired
-	@Qualifier("hbTemplate")
+	@Qualifier("jdbcTemplate")
+	//@Qualifier("hbTemplate")
 	EmployeeRepositoryDB<Employee> employeeRepo;
 	
 	@Override
@@ -34,7 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstan
 		try{
 			id = employeeRepo.saveObject(emp);
 			emp.setId(id);
-			employeeList.put(id, emp);
+			//employeeList.put(id, emp);
 			
 			
 		}catch(Exception e){
@@ -47,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstan
 	@Override
 	public Employee getEmployee(long empId) {
 		
-		Employee emp = employeeList.get(empId);
+		Employee emp = employeeRepo.getObject(empId);
 		if(emp == null){
 			throw new EmployeeNotExists(EMPLOYEE_NOTEXISTS_EXCEPTION_MSG);
 		}
@@ -58,9 +53,12 @@ public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstan
 	public boolean deleteEmployee(long empid) throws EmployeeAppException {
 		boolean sts = false;
 		try{
-			if(employeeList.remove(empid) != null){
+			/*if(employeeList.remove(empid) != null){
 				sts = true;
-			}
+			}*/
+			
+			Employee emp = employeeRepo.getObject(empid);
+			employeeRepo.deleteObject(emp);
 		}catch(Exception e){
 			throw new EmployeeAppException(EMPLOYEE_APP_DELETE_EXCEPTION_MSG);
 		}
@@ -73,9 +71,11 @@ public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstan
 
 		boolean sts = false;
 		try{
-			if(employeeList.put(empid, emp) != null){
+			/*if(employeeList.put(empid, emp) != null){
 				sts = true;
-			}
+			}*/
+			
+			employeeRepo.updateObject(emp);
 		}catch(Exception e){
 			throw new EmployeeAppException(EMPLOYEE_APP_UPDATE_EXCEPTION_MSG);
 		}
@@ -87,10 +87,12 @@ public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstan
 	public List<Employee> getAllEmployees(String user) {
 		List<Employee> empList = null;
 		if(EMPLOYEE_USER_ADMIN.equalsIgnoreCase(user)){
-			empList = new ArrayList<>(employeeList.values());
+			//empList = new ArrayList<>(employeeList.values());
+			empList = employeeRepo.getAllObject();
 		}else{
-			empList = employeeList.values().stream().filter(emp -> emp.getUser().equalsIgnoreCase(user))
-			.collect(Collectors.toList());
+			/*empList = employeeList.values().stream().filter(emp -> emp.getUser().equalsIgnoreCase(user))
+			.collect(Collectors.toList());*/
+			empList = employeeRepo.getAllObject(user);
 		}
 		
 		return empList;
@@ -112,9 +114,11 @@ public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstan
 
 	@Override
 	public byte[] getEmployeePhoto(long empId) {
-		Optional<Employee> empObj = employeeList.values().stream().filter(emp -> emp.getId() == empId).findFirst();
+		/*Optional<Employee> empObj = employeeList.values().stream().filter(emp -> emp.getId() == empId).findFirst();
+*/		
+		Employee emp = employeeRepo.getObject(empId);
 		
-		return employeeRepo.getObject(empId).getPhoto();
+		return emp.getPhoto();
 	}
 
 	

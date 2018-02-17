@@ -7,7 +7,7 @@ public class EmployeeDTO {
 	private String lastName;
 	private String email;
 	private boolean highlight;
-	private String user;
+	private String userCreated;
 	
 	
 	public boolean isHighlight() {
@@ -17,10 +17,10 @@ public class EmployeeDTO {
 		this.highlight = highlight;
 	}
 	public String getUser() {
-		return user;
+		return userCreated;
 	}
 	public void setUser(String user) {
-		this.user = user;
+		this.userCreated = user;
 	}
 	public long getId() {
 		return id;

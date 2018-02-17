@@ -14,8 +14,8 @@ import com.employee.exception.classes.JwtAthenticationException;
 import com.employee.model.AppUser;
 import com.employee.security.model.AuthenticatedUser;
 import com.employee.security.model.JwtAuthenticationToken;
-import com.employee.util.EmployeeAppConstants;
 import com.employee.util.JWTParser;
+import com.employee.util.constants.EmployeeAppConstants;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

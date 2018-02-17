@@ -1,4 +1,4 @@
-package com.employee.util;
+package com.employee.util.constants;
 
 public interface EmployeeAppConstants {
 
@@ -53,4 +53,13 @@ public interface EmployeeAppConstants {
 	
 	String EMPLOYEE_USER_ADMIN = "admin";
 	
+	/**
+	 * EEMPLOYEE table column name
+	 */
+	String EMPLOYEE_COLUMN_ID = "ID";
+	String EMPLOYEE_COLUMN_FNAME = "FIRSTNAME";
+	String EMPLOYEE_COLUMN_LNAME = "LASTNAME";
+	String EMPLOYEE_COLUMN_EMAIL = "EMAIL";
+	String EMPLOYEE_COLUMN_PHOTO = "PHOTO";
+	String EMPLOYEE_COLUMN_USER = "USERCREATED";
 }

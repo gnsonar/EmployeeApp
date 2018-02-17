@@ -14,7 +14,9 @@
     
     <context:component-scan base-package="com.employee" />
     <context:annotation-config />
+    
     <import resource="database.xml"/>
+    
     <mvc:resources location="/WEB-INF/" mapping="/**" ></mvc:resources>
     <!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     	<property name="suffix" value=".html"/>
@@ -24,8 +26,6 @@
     <bean id="resourceBundle" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     	<property name="location" value="classpath:application.properties" />
     </bean>
-    
-    
     
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="messageConverters">
@@ -40,5 +40,4 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
      	<property name="maxUploadSize" value="268435456"/>
  	</bean>
-	
 </beans>

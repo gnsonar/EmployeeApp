@@ -14,7 +14,7 @@ import com.employee.exception.classes.EmployeeNotExists;
 import com.employee.exception.classes.JwtAthenticationException;
 import com.employee.exception.model.ErrorResponse;
 import com.employee.security.model.JwtAuthenticationToken;
-import com.employee.util.EmployeeAppConstants;
+import com.employee.util.constants.EmployeeAppConstants;
 
 @ControllerAdvice
 public class EmployeeExceptionHandler implements EmployeeAppConstants{
