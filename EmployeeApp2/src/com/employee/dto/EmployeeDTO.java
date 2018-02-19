@@ -1,11 +1,27 @@
 package com.employee.dto;
 
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class EmployeeDTO {
 
 	private long id;
+	
+	@NotEmpty
+	@Length(max = 20)
 	private String firstName;
+	
+	@NotEmpty
+	@Length(max = 20)
 	private String lastName;
+	
+	@NotEmpty
+	@Length(max = 50)
+	@Email
 	private String email;
+	
 	private boolean highlight;
 	private String userCreated;
 	

@@ -2,10 +2,13 @@ package com.employee;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +36,9 @@ public class EmployeeController implements EmployeeAppConstants{
 	
 	@Value("${employee.security.authheader}")
 	String authHeader;
+	
+	@Autowired
+	MessageSource messageSource;
 	
 	@GetMapping(value = "/getAllEmployees" , produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<EmployeeDTO> getAllEmployees(@RequestParam("user") String user) throws Exception{
@@ -62,7 +68,7 @@ public class EmployeeController implements EmployeeAppConstants{
 		byte[] photo = file.getBytes();
 		empService.addEmployeePhoto(empId, photo);
 		
-		return "ok";
+ 		return "ok";
 	}
 	
 	@GetMapping(value = "/getEmployeePhoto", produces = MediaType.APPLICATION_JSON_VALUE)

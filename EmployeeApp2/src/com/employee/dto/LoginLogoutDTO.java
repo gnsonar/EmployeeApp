@@ -1,8 +1,16 @@
 package com.employee.dto;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class LoginLogoutDTO {
 
+	@NotEmpty
+	@Length(min=4, max = 20)
 	private String username;
+	
+	@NotEmpty
+	@Length(min = 4, max = 20)
 	private String password;
 	private String ip;
 	private String token;

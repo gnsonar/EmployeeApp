@@ -19,8 +19,8 @@ public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstan
 	/*Map<Long, Employee> employeeList = new HashMap<>();*/
 	
 	@Autowired
-	@Qualifier("jdbcTemplate")
-	//@Qualifier("hbTemplate")
+	//@Qualifier("jdbcTemplate")
+	@Qualifier("hbTemplate")
 	EmployeeRepositoryDB<Employee> employeeRepo;
 	
 	@Override

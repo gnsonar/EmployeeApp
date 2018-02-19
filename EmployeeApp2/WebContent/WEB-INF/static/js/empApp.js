@@ -63,11 +63,9 @@
 			        url: restConstants.EMP_VALIDATE_TOKEN_SERVICE
 			    }).then(function (response) {
 			        console.log(response.data);
-			        /*if(response.data != null && response.data != '' && response.data == 'success'){
+			        if(response.data != null && response.data != '' && response.data == 'success'){
 			        	$location.path('/employees');
-			        }*/
-			    },function (response) {
-			        console.log(response);
+			        }
 			    });
 			}
 		},
@@ -158,6 +156,7 @@
 			$scope.validLastName = false,
 			$scope.disabled = false,
 			$scope.errorMsg = "",
+			$scope.errList = [],
 			$scope.initData = function(){
 				$scope.username = sessionStorage.getItem("user");
 				$http({
@@ -188,7 +187,7 @@
 			}
     		$scope.addUser = function(){
 				var validData = false;
-				
+				$scope.errList = [];
 				if($scope.form == undefined){
 					$scope.validationError = true;
 				}
@@ -288,7 +287,7 @@
 								    	console.log(response);
 								    }, function (response) {
 								        console.log(response);
-								        $scope.showErrorAndRedirect(response,$scope,$location);
+								        //$scope.showErrorAndRedirect(response,$scope,$location);
 								    })
 
 						        }
@@ -383,6 +382,8 @@
     				$scope.errorMsg = response.data.errorMessage;
     			}else if(response.data.errorCode == 401){
     				$scope.errorMsg = "You are not authorized to delete records";
+    			} if(response.status == 400){
+    				$scope.errList = response.data.errorList;
     			} else{
     				sessionStorage.setItem("errorMessage","Please Login Again to Continue");
     				$location.path('/home');
