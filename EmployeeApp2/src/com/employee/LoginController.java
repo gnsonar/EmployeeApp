@@ -38,7 +38,7 @@ public class LoginController implements EmployeeAppConstants{
 		return dto;
 	}
 	
-	@GetMapping(value = "/validateToken" , produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/validateToken" , produces = MediaType.TEXT_PLAIN_VALUE)
 	public String validateToken(@RequestHeader("Authorization") String token){
 		
 		try{

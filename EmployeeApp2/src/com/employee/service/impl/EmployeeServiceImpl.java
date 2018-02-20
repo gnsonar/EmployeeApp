@@ -2,6 +2,8 @@ package com.employee.service.impl;
 
 import java.util.List;
 
+import javax.sql.rowset.serial.SerialException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -19,8 +21,8 @@ public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstan
 	/*Map<Long, Employee> employeeList = new HashMap<>();*/
 	
 	@Autowired
-	//@Qualifier("jdbcTemplate")
-	@Qualifier("hbTemplate")
+	@Qualifier("jdbcTemplate")
+	//@Qualifier("hbTemplate")
 	EmployeeRepositoryDB<Employee> employeeRepo;
 	
 	@Override
@@ -113,13 +115,11 @@ public class EmployeeServiceImpl implements EmployeeService , EmployeeAppConstan
 	}
 
 	@Override
-	public byte[] getEmployeePhoto(long empId) {
-		/*Optional<Employee> empObj = employeeList.values().stream().filter(emp -> emp.getId() == empId).findFirst();
-*/		
+	public Employee getEmployeePhoto(long empId) {
+		/*Optional<Employee> empObj = employeeList.values().stream().filter(emp -> emp.getId() == empId).findFirst();*/
+		 		
 		Employee emp = employeeRepo.getObject(empId);
 		
-		return emp.getPhoto();
+		return emp;
 	}
-
-	
 }

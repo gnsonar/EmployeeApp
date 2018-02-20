@@ -10,15 +10,15 @@ public class EmployeeDTO {
 	private long id;
 	
 	@NotEmpty
-	@Length(max = 20)
+	@Length(min=1, max = 20)
 	private String firstName;
 	
 	@NotEmpty
-	@Length(max = 20)
+	@Length(min=1, max = 20)
 	private String lastName;
 	
 	@NotEmpty
-	@Length(max = 50)
+	@Length(min=5, max = 50)
 	@Email
 	private String email;
 	

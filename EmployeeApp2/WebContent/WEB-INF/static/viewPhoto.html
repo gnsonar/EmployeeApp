@@ -3,10 +3,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Employee Photo</title>
-<script src="js/angular.js"></script>
-<script src="js/viewPhoto.js"></script>
 </head>
-<body ng-app="photoApp" ng-controller="photoAppCntrl" data-ng-init="loadPhoho()">	
+<body ng-controller="photoAppCntrl" data-ng-init="loadPhoho()">	
 	<img ng-src="data:image/JPEG;base64,{{image}}" height="200px" width="300px">
 </body>
 </html>

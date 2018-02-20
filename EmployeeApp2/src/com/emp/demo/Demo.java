@@ -53,5 +53,13 @@ public class Demo {
 		
 		System.out.println(abc.get().getId());
 		
+		try {
+			int i = 0 ;
+		}catch(OutOfMemoryError ex) {
+			System.out.println(ex);
+		}
+		
+		
+		
 	}
 }

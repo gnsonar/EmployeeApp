@@ -22,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.employee.dto.EmployeeDTO;
 import com.employee.exception.classes.EmployeeAppException;
+import com.employee.model.Employee;
 import com.employee.service.EmployeeService;
 import com.employee.util.ModelMapperUtil;
 import com.employee.util.constants.EmployeeAppConstants;
@@ -45,8 +46,8 @@ public class EmployeeController implements EmployeeAppConstants{
 		return ModelMapperUtil.mapEmpModelToDTOList(empService.getAllEmployees(user));
 	}
 	
-	@PostMapping(value = "/saveEmployee", produces = MediaType.APPLICATION_JSON_VALUE)
-	public String saveEmployee(@RequestBody EmployeeDTO emp) throws EmployeeAppException {
+	@PostMapping(value = "/saveEmployee", produces = MediaType.TEXT_PLAIN_VALUE)
+	public String saveEmployee(@Validated @RequestBody EmployeeDTO emp) throws EmployeeAppException {
 		
 		String sts = EMP_APP_SER_FAIL;
 		Long id = 0l;
@@ -61,20 +62,20 @@ public class EmployeeController implements EmployeeAppConstants{
 		return sts;
 	}
 	
-	@PostMapping(value = "/saveEmployeePhoto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/saveEmployeePhoto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
 	public String saveEmployeePhoto(@RequestParam("uploadfile") MultipartFile file , 
 			@RequestParam("empId") Long empId) throws Exception{
 		
 		byte[] photo = file.getBytes();
 		empService.addEmployeePhoto(empId, photo);
 		
- 		return "ok";
+		return "ok";
 	}
 	
 	@GetMapping(value = "/getEmployeePhoto", produces = MediaType.APPLICATION_JSON_VALUE)
-	public byte[] getEmployeePhoto(	@RequestParam("empId") Long empId) throws Exception{
+	public Employee getEmployeePhoto(	@RequestParam("empId") Long empId) throws Exception{
 		
-		byte[] photo = empService.getEmployeePhoto(empId);
+		Employee photo = empService.getEmployeePhoto(empId);
 		
 		return photo;
 	}
@@ -83,7 +84,7 @@ public class EmployeeController implements EmployeeAppConstants{
 		return ModelMapperUtil.mapEmpModelToDTO(empService.getEmployee(empId));
 	}
 	
-	@RequestMapping(value = "/deleteEmployee" , method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/deleteEmployee" , method = RequestMethod.DELETE, produces = MediaType.TEXT_PLAIN_VALUE)
 	public String deleteEmployee(@RequestParam("empid") Integer empid) throws EmployeeAppException{
 		
 		if(empService.deleteEmployee(empid)){

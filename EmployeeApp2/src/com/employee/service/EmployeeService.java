@@ -22,5 +22,5 @@ public interface EmployeeService {
 
 	public List<Employee> getAllEmployees(String user);
 
-	public byte[] getEmployeePhoto(long empId) throws RuntimeException, SerialException;
+	public Employee getEmployeePhoto(long empId) throws RuntimeException, SerialException;
 }
