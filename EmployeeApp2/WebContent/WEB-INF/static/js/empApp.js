@@ -215,6 +215,17 @@
 				
 				
 				if(validData){
+					var file = $scope.form.photo;
+					
+					console.log('file is ' + file);
+
+					var fd = new FormData();
+		            fd.append('uploadfile', file);
+		            fd.append('firstName', $scope.form.fname);
+		            fd.append('lastName', $scope.form.lname);
+		            fd.append('email', $scope.form.email);
+		            fd.append('user', sessionStorage.getItem("user"));
+		            fd.append('id', '0');
 					var emp = {
 							firstName:$scope.form.fname,
 			            	lastName:$scope.form.lname,
@@ -253,11 +264,11 @@
 						        method: 'POST',
 						        headers: {
 						        	'Accept': 'text/plain',
-						        	'Content-Type': 'application/json',
+						        	'Content-Type': undefined,
 						        	'Authorization' : sessionStorage.getItem("token")
 						        },
 						        url: restConstants.EMP_SAVE_SERVICE,
-						        data: emp
+						        data: fd
 						    }).then(function (response) {
 						        console.log(response.data);
 						        if(response.status == 200 && response.data != 'fail'){
@@ -268,7 +279,7 @@
 					            		$scope.employees.splice(index, 1);
 					            	}
 						        	
-						        	var file = $scope.form.photo;
+						        	/*var file = $scope.form.photo;
 									
 									console.log('file is ' + file);
 
@@ -288,7 +299,7 @@
 								    }, function (response) {
 								        console.log(response);
 								        $scope.showErrorAndRedirect(response,$scope,$location);
-								    })
+								    })*/
 
 						        }
 						    }, function (response) {
@@ -399,23 +410,28 @@
     		$scope.openModal = function(emp){
     			sessionStorage.setItem("empId",emp.id);
     			 $uibModal.open({
-    				 ariaLabelledBy: 'modal-title',
-    				 ariaDescribedBy: 'modal-body',
+    				 animation:true,
+    			     ariaLabelledBy: 'modal-title',
+    			     ariaDescribedBy: 'modal-body',
     				 templateUrl: '/EmployeeApp2/static/viewPhoto.html',
     				 controller :'photoAppCntrl',
-    				 controllerAs: '$ctrl',
-    				 size: 'lg',
-    				 resolve: {
-    				 
-    				 } 
+    				 size: 'sm', 
+				     resolve: {
+				        items: function () {
+				         // return $ctrl.items;
+				        } 
+				     }
+    			 }).result.then(function(response){
+    				 console.log("ok:"+response);
+    			 }, function(response){
+    				 console.log("error:"+response);
     			 });
     		}
 	});
 
-	mainApp.controller('photoAppCntrl', function($scope,$http,$uibModalInstance){
+	/*mainApp.controller('photoAppCntrl', function($scope,$http,$uibModalInstance){
 		
 		$scope.loadPhoho = function(){
-			
 			var token = sessionStorage.getItem("token");
 			var empId = sessionStorage.getItem("empId");
 			$http({
@@ -429,12 +445,11 @@
 		    }).then(function (response) {
 		        console.log(response.data);
 		        $scope.image = response.data.photo;
-		        /*if(response.data != null && response.data != '' && response.data == 'success'){
+		        if(response.data != null && response.data != '' && response.data == 'success'){
 		        	$location.path('/employees');
-		        }*/
+		        }
 		    },function (response) {
 		        console.log(response);
-		        $window.close();
 		    });
 		}
 		$scope.cancelModal = function(){
@@ -444,4 +459,4 @@
 		$scope.ok = function(){
 			$uibModalInstance.close('save');
 		}
-	});
+	});*/

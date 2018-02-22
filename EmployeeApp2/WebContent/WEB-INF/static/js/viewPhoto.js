@@ -1,21 +1,6 @@
-var mainApp = angular.module("photoApp", ['ngRoute']);
+var mainApp = angular.module("photoApp", []);
 
-mainApp.config(function($routeProvider) {
-	$routeProvider
-		.when('/home', {
-			templateUrl: 'static/login.html',
-			controller: 'loginCntrl'
-		})
-		.when('/employees', {
-			templateUrl: 'static/Employee.html',
-			controller: 'empCntrl'
-		})
-		.otherwise({
-			redirectTo: '/home'
-		});
-});
-
-mainApp.controller('photoAppCntrl', function($scope,$http,$window,$location){
+mainApp.controller('photoAppCntrl', function($scope,$http,$window){
 	
 	$scope.loadPhoho = function(){
 		
