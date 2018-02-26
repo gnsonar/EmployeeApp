@@ -264,11 +264,11 @@
 						        method: 'POST',
 						        headers: {
 						        	'Accept': 'text/plain',
-						        	'Content-Type': undefined,
+						        	'Content-Type': 'application/json',
 						        	'Authorization' : sessionStorage.getItem("token")
 						        },
 						        url: restConstants.EMP_SAVE_SERVICE,
-						        data: fd
+						        data: emp
 						    }).then(function (response) {
 						        console.log(response.data);
 						        if(response.status == 200 && response.data != 'fail'){
@@ -279,7 +279,7 @@
 					            		$scope.employees.splice(index, 1);
 					            	}
 						        	
-						        	/*var file = $scope.form.photo;
+						        	var file = $scope.form.photo;
 									
 									console.log('file is ' + file);
 
@@ -299,7 +299,7 @@
 								    }, function (response) {
 								        console.log(response);
 								        $scope.showErrorAndRedirect(response,$scope,$location);
-								    })*/
+								    })
 
 						        }
 						    }, function (response) {
